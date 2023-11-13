@@ -1,0 +1,102 @@
+"A date string, such as `2007-12-03`, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar."
+scalar Date @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date")
+"A datetime string with format `Y-m-d H:i:s`, e.g. `2018-05-23 13:43:32`."
+scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+
+
+"Indicates what fields are available at the top level of a query operation."
+type Query {
+    "Find a single user by an identifying attribute."
+    user(
+        "The id of the user."
+        id: ID
+        "The name of the user."
+        name: String
+    ): User @find
+    #user: User @find
+
+    "find all users"
+    users: [User!]! @paginate(defaultCount: 15)
+
+    "Find a single website by an identifying attribute."
+    website(
+        "The id of the website."
+        id: ID
+        "The name of the website."
+        name: String
+    ): Website @find
+
+    "find all websites"
+    websites: [Website!]! @paginate(defaultCount: 15)
+
+    "Validate a token"
+    validateToken: ValidateTokenResponse! @field(resolver: "App\\GraphQL\\Queries\\ValidateTokenQuery@validate")
+
+}
+
+"Mutations are entry points for writes into our data graph."
+type Mutation {
+    loginTest(
+        email: String!
+        password: String!
+        device_name: String!
+    ): AccessTokenTest @field(resolver: "App\\GraphQL\\Mutations\\LoginTest@__invoke")
+}
+
+
+type AccessTokenTest {
+    token: String!
+}
+
+type Website {
+    id: ID!
+    users: [User!]! @hasMany
+    name: String!
+    url: String!
+    email: String!
+    phone: String!
+    address: String!
+    city: String!
+    state: String!
+    zip: String!
+    created_at: DateTime
+    updated_at: DateTime
+}
+
+
+"Account of a person who utilizes this application."
+type User {
+    "Unique primary key."
+    id: ID!
+
+    "Website"
+    website: Website! @belongsTo
+
+    "Non-unique name."
+    name: String!
+
+    "Unique email address."
+    email: String!
+
+    "When the email was verified."
+    email_verified_at: DateTime
+
+    "When the account was created."
+    created_at: DateTime
+
+    "When the account was last updated."
+    updated_at: DateTime
+}
+
+type ValidateTokenResponse {
+    isValid: Boolean!
+    user: User
+}
+
+#import sanctum.graphql
+
+
+
+
+
+
