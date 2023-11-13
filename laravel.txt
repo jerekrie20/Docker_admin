@@ -1,0 +1,55 @@
+Laravel Commands
+
+new app
+laravel new example-app
+
+Migrate
+
+//Migrate with certain paths
+php artisan migrate --path=database/migrations/blog
+
+Laravel:
+  "Networks": {
+                "admin_sail": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": [
+                        "admin-laravel.test-1",
+                        "laravel.test",
+                        "ee559a2307a6"
+                    ],
+                    "NetworkID": "95c70e6d51b3df7b17a2e29c35298bbc53a3e8f3f110a79d032321df0f5d3a52",
+                    "EndpointID": "b43d75d82b10ed9ae7a23e505a2e7f49e7ec6888fdf997e4064642dc2a3d21b8",
+                    "Gateway": "172.18.0.1",
+                    "IPAddress": "172.18.0.7",
+                    "IPPrefixLen": 16,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "MacAddress": "02:42:ac:12:00:07",
+                    "DriverOpts": null
+                }
+            }
+
+flat php:
+
+ "Networks": {
+                "admin_sail": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": [
+                        "website-container",
+                        "flat-php-app",
+                        "62d456a6e15a"
+                    ],
+                    "NetworkID": "95c70e6d51b3df7b17a2e29c35298bbc53a3e8f3f110a79d032321df0f5d3a52",
+                    "EndpointID": "9b391e478f9b1f396b0f06dd46b7137ca2a14c2769954974c5676846686b2acb",
+                    "Gateway": "172.18.0.1",
+                    "IPAddress": "172.18.0.8",
+                    "IPPrefixLen": 16,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "MacAddress": "02:42:ac:12:00:08",
+                    "DriverOpts": null
+                }
